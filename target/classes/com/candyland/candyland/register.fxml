@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.candyland.candyland.RegisterController">
+    <children>
+        <ImageView fx:id="CottonCandyView" fitHeight="569.0" fitWidth="381.0" opacity="0.34" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../../../../images/CottonCandy.jpeg" />
+            </image>
+        </ImageView>
+        <AnchorPane prefHeight="100.0" prefWidth="381.0" style="-fx-background-color: #F8CDEE;">
+            <children>
+                <Label fx:id="UserRegisterLabel" alignment="CENTER" layoutX="66.0" layoutY="36.0" text="Inregistrarea utilizatorului">
+                    <font>
+                        <Font size="22.0" />
+                    </font>
+                    <textFill>
+                        <RadialGradient centerX="0.6674008474476012" centerY="0.54545453822974" radius="0.5">
+                            <stops>
+                                <Stop>
+                                    <color>
+                                        <Color />
+                                    </color>
+                                </Stop>
+                                <Stop offset="1.0">
+                                    <color>
+                                        <Color red="0.9052631855010986" green="0.043586745858192444" blue="0.043586745858192444" />
+                                    </color>
+                                </Stop>
+                            </stops>
+                        </RadialGradient>
+                    </textFill>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Label fx:id="FirstnameLabel" layoutX="33.0" layoutY="129.0" text="Nume" />
+        <Label fx:id="LastnameLabel" layoutX="33.0" layoutY="188.0" text="Prenume" />
+        <Label fx:id="usernameLabel" layoutX="33.0" layoutY="242.0" text="Nume de utilizator" />
+        <Label fx:id="confirmPasswordLabel" layoutX="33.0" layoutY="410.0" text="Confirmare parola" />
+        <Label fx:id="PasswordLabel" layoutX="33.0" layoutY="360.0" text="Parola" />
+        <Label fx:id="roleLabel" layoutX="33.0" layoutY="300.0" text="Doresc sa ma inregistrez ca" />
+        <TextField fx:id="FirstnameTextField" layoutX="33.0" layoutY="147.0" prefHeight="27.0" prefWidth="317.0" promptText="ex: Popescu" />
+        <TextField fx:id="LastnameTextFiel" layoutX="33.0" layoutY="206.0" prefHeight="27.0" prefWidth="317.0" promptText="ex: Ioana" />
+        <TextField fx:id="usernameTextField" layoutX="33.0" layoutY="260.0" prefHeight="27.0" prefWidth="317.0" promptText="PopescuIoana" />
+        <ChoiceBox fx:id="chooseRole" layoutX="33.0" layoutY="318.0" prefHeight="28.0" prefWidth="317.0" />
+        <PasswordField fx:id="setPasswordTextField" layoutX="33.0" layoutY="378.0" prefHeight="26.0" prefWidth="317.0" promptText="Parola" />
+        <PasswordField fx:id="confirmPasswordTextField" layoutX="33.0" layoutY="436.0" prefHeight="26.0" prefWidth="317.0" promptText="Parola" />
+        <Button fx:id="registerButton" layoutX="39.0" layoutY="485.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #D89ECB;" text="Inregistrare" textFill="RED" />
+        <Button fx:id="cancelButton" layoutX="240.0" layoutY="485.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #D89ECB;" text="Anulare" textFill="RED" />
+      <Label fx:id="wrongPasswordLabel" layoutX="152.0" layoutY="410.0" onDragDetected="#registerButtonOnAction" prefHeight="18.0" prefWidth="199.0" />
+      <Label fx:id="registerLabel" alignment="CENTER" layoutX="40.0" layoutY="111.0" onDragDetected="#registerButtonOnAction" prefHeight="18.0" prefWidth="290.0" />
+    </children>
+</Pane>
