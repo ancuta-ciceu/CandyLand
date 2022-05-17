@@ -42,6 +42,7 @@ public class RegisterController implements Initializable {
     public void registerButtonOnAction(ActionEvent event){
         if(setPasswordTextField.getText().equals(confirmPasswordTextField.getText())){
             wrongPasswordLabel.setText("");
+            registerUser();
         }
         else {
             wrongPasswordLabel.setText("Parolele nu corespund!");
@@ -91,11 +92,11 @@ public class RegisterController implements Initializable {
         String firstname = FirstnameTextField.getText();
         String lastname = LastnameTextField.getText();
         String username = usernameTextField.getText();
-        String role = chooseRole.getAccessibleText();
-        String password = setPasswordTextField.getAccessibleText();
+        String role = chooseRole.getSelectionModel().getSelectedItem();
+        String password = encodePassword(usernameTextField.getText(),setPasswordTextField.getText());
 
 
-        String insertFields = "INSERT INTO user_account(nume, prenume, username, rol, parola) VALUE ('";
+        String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUE ('";
         String insertValues = firstname + "','" +  lastname + "','" + username + "','" + role + "','" + password + "')";
         String insertToRegister = insertFields+insertValues;
 
