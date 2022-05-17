@@ -38,6 +38,8 @@ public class RegisterController implements Initializable {
     private TextField LastnameTextField;
     @FXML
     private TextField usernameTextField;
+    @FXML
+    private Label wrongUsernameLabel;
 
     public void registerButtonOnAction(ActionEvent event){
         if(setPasswordTextField.getText().equals(confirmPasswordTextField.getText())){
@@ -95,21 +97,24 @@ public class RegisterController implements Initializable {
         String role = chooseRole.getSelectionModel().getSelectedItem();
         String password = encodePassword(usernameTextField.getText(),setPasswordTextField.getText());
 
+        if(usernameTextField.getText().equals(username)){
+            wrongUsernameLabel.setText("Nu puteti alege acest nume de utilizator");
+        }else {
+            String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUE ('";
+            String insertValues = firstname + "','" + lastname + "','" + username + "','" + role + "','" + password + "')";
+            String insertToRegister = insertFields + insertValues;
 
-        String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUE ('";
-        String insertValues = firstname + "','" +  lastname + "','" + username + "','" + role + "','" + password + "')";
-        String insertToRegister = insertFields+insertValues;
+            try {
+                Statement statement = connectDB.createStatement();
+                statement.executeUpdate(insertToRegister);
 
-        try{
-            Statement statement = connectDB.createStatement();
-            statement.executeUpdate(insertToRegister);
+                registerLabel.setText("Contul dumneavoastra a fost inregistrat!");
 
-            registerLabel.setText("Contul dumneavoastra a fost inregistrat!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
 
-        }catch(Exception e){
-            e.printStackTrace();
-            e.getCause();
-
+            }
         }
     }
 
