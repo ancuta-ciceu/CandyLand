@@ -1,4 +1,4 @@
-package com.candyland.candyland;
+package com.candyland.candyland.register;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

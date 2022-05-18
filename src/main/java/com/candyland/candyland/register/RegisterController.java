@@ -1,4 +1,5 @@
-package com.candyland.candyland;
+package com.candyland.candyland.register;
+import com.candyland.candyland.register.DatabaseConnection;
 import javafx.application.Platform;
 import  javafx.fxml.FXML;
 import javafx.fxml.Initializable;
