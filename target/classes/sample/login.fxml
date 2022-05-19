@@ -30,7 +30,7 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="14.0" layoutY="221.0" prefHeight="30.0" prefWidth="215.0" text="Autentificare esuata. Incercati din nou." textFill="#9c1c91">
+            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="14.0" layoutY="221.0" prefHeight="30.0" prefWidth="215.0" textFill="#9c1c91">
                <font>
                   <Font name="Arial" size="11.0" />
                </font>
