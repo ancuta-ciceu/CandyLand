@@ -100,7 +100,7 @@ public class RegisterController implements Initializable {
 
         if(usernameTextField.getText().equals(username)){
             wrongUsernameLabel.setText("Nu puteti alege acest nume de utilizator");
-        }else {
+       }else {
             String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUE ('";
             String insertValues = firstname + "','" + lastname + "','" + username + "','" + role + "','" + password + "')";
             String insertToRegister = insertFields + insertValues;
