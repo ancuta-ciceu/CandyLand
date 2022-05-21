@@ -43,7 +43,7 @@
                <graphic>
                   <ImageView fitHeight="17.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../images/home.png" />
+                        <Image url="@../../../../../../images/home.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -52,7 +52,7 @@
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../../../images/shopping.png" />
+                        <Image url="@../../../../../../images/shopping.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -61,7 +61,7 @@
       </AnchorPane>
       <ImageView fitHeight="569.0" fitWidth="381.0" layoutX="1.0" layoutY="70.0" opacity="0.26" preserveRatio="true">
          <image>
-            <Image url="@Imagini_Produse/Macarons.jpg" />
+            <Image url="@../../../../../../images/Macarons.jpg" />
          </image>
       </ImageView>
       <Button layoutX="14.0" layoutY="88.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #EBB7DF;" text="Sortare">
@@ -89,32 +89,32 @@
                <children>
                   <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@Imagini_Produse/minioni.jpg" />
+                        <Image url="@../../../../../../images/minioni.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@Imagini_Produse/amandina.jpg" />
+                        <Image url="@../../../../../../images/amandina.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="93.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@Imagini_Produse/cremeS.jpg" />
+                        <Image url="@../../../../../../images/cremeS.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@Imagini_Produse/cheesecake.jpg" />
+                        <Image url="@../../../../../../images/cheesecake.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@Imagini_Produse/dobos.jpg" />
+                        <Image url="@../../../../../../images/dobos.jpg" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@Imagini_Produse/savarina.jpg" />
+                        <Image url="@../../../../../../images/savarina.jpg" />
                      </image>
                   </ImageView>
                   <Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" text="Adauga in cos" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />

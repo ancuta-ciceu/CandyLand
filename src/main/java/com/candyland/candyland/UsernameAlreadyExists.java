@@ -1,4 +1,4 @@
-package com.candyland.candyland.exceptions;
+package com.candyland.candyland;
 
 public class UsernameAlreadyExists extends Exception {
 

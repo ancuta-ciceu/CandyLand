@@ -1,4 +1,4 @@
-package com.candyland.candyland.register;
+package com.candyland.candyland;
 import java.sql.Connection;
 import java.sql.DriverManager;
 

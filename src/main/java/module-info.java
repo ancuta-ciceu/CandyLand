@@ -5,5 +5,4 @@ module CandyLand {
     requires java.sql;
 
     opens com.candyland.candyland;
-    opens com.candyland.candyland.register;
 }
