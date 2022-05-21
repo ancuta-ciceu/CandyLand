@@ -2,30 +2,34 @@ package sample;
 
 import com.candyland.candyland.DatabaseConnection;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.net.URL;
 
 public class loginController implements Initializable {
     //public TextField usernameTextField;
     //public PasswordField enterPasswordField;
-    public Button loginButton;
-
+    //@FXML
+    //private Button loginButton;
     @FXML
     private Label loginMessageLabel;
     @FXML
@@ -65,11 +69,13 @@ public class loginController implements Initializable {
 
         try {
             Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verifyLogin);
+            ResultSet queryResult;
+            queryResult = statement.executeQuery(verifyLogin);
 
             while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
-                    loginMessageLabel.setText("Felicitari!");
+                    //loginMessageLabel.setText("Felicitari!");
+                    createAccountForm();
 
                 } else {
                     loginMessageLabel.setText("Autentificare nereusita. Incercati din nou.");
@@ -82,5 +88,17 @@ public class loginController implements Initializable {
             e.getCause();
         }
 
+    }
+    public void createAccountForm (){
+            try{
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("register.fxml")));
+                Stage registerStage = new Stage();
+                registerStage.initStyle(StageStyle.UNDECORATED);
+                registerStage.setScene(new Scene(root, 381, 569));
+                registerStage.show();
+            }catch(Exception e){
+                e.printStackTrace();
+                e.getCause();
+            }
     }
 }
