@@ -30,7 +30,7 @@
                   <Font name="Arial Bold" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="14.0" layoutY="221.0" prefHeight="30.0" prefWidth="215.0" text="Autentificare esuata. Incercati din nou." textFill="#9c1c91">
+            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="14.0" layoutY="221.0" prefHeight="30.0" prefWidth="215.0" textFill="#9c1c91">
                <font>
                   <Font name="Arial" size="11.0" />
                </font>
@@ -42,7 +42,7 @@
             </Label>
             <TextField fx:id="usernameTextField" layoutX="51.0" layoutY="107.0" />
             <PasswordField fx:id="enterPasswordField" layoutX="51.0" layoutY="174.0" />
-            <Button fx:id="loginButton" layoutX="82.0" layoutY="269.0" mnemonicParsing="false" style="-fx-background-color: #9D2774;" text="Autentificare" textAlignment="CENTER" textFill="#f4edf4" />
+            <Button fx:id="loginButton" layoutX="82.0" layoutY="269.0" mnemonicParsing="false" onAction="#loginButtonOnAction" style="-fx-background-color: #9D2774;" text="Autentificare" textAlignment="CENTER" textFill="#f4edf4" />
             <Button fx:id="cancelButton" layoutX="96.0" layoutY="308.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" style="-fx-background-color: #9D2774;" text="Anulare" textAlignment="CENTER" textFill="#ece1eb" />
             <Label alignment="CENTER" layoutX="89.0" layoutY="87.0" text="Nume utilizator" textFill="#9c1c91">
                <font>
