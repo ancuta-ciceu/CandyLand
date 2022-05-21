@@ -12,6 +12,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -40,6 +42,12 @@ public class RegisterController implements Initializable {
     private TextField usernameTextField;
     @FXML
     private Label wrongUsernameLabel;
+
+    public ArrayList<String> users = new ArrayList<String>();
+
+    public void addUsers(String u){
+        users.add(u);
+    }
 
     public void registerButtonOnAction(ActionEvent event){
         if(setPasswordTextField.getText().equals(confirmPasswordTextField.getText())){
@@ -97,25 +105,30 @@ public class RegisterController implements Initializable {
         String role = chooseRole.getSelectionModel().getSelectedItem();
         String password = encodePassword(usernameTextField.getText(),setPasswordTextField.getText());
 
-        if(usernameTextField.getText().equals(username)){
-            wrongUsernameLabel.setText("Nu puteti alege acest nume de utilizator");
-        }else {
-            String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUE ('";
-            String insertValues = firstname + "','" + lastname + "','" + username + "','" + role + "','" + password + "')";
-            String insertToRegister = insertFields + insertValues;
+        //Iterator<String> it = users.iterator();
+        //while (it.hasNext()){
+           // String u = it.next();
+            //if(usernameTextField.getText().equals(u.toString())){
+               // wrongUsernameLabel.setText("Nu puteti alege acest nume de utilizator");
+            //}else {
+                String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUE ('";
+                String insertValues = firstname + "','" + lastname + "','" + username + "','" + role + "','" + password + "')";
+                String insertToRegister = insertFields + insertValues;
+                addUsers(username);
 
-            try {
-                Statement statement = connectDB.createStatement();
-                statement.executeUpdate(insertToRegister);
+                try {
+                    Statement statement = connectDB.createStatement();
+                    statement.executeUpdate(insertToRegister);
 
-                registerLabel.setText("Contul dumneavoastra a fost inregistrat!");
+                    registerLabel.setText("Contul dumneavoastra a fost inregistrat!");
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                e.getCause();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    e.getCause();
 
+                }
             }
-        }
-    }
+       // }
+   // }
 
 }
