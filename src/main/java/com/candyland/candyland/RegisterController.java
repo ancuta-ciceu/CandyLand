@@ -105,12 +105,6 @@ public class RegisterController implements Initializable {
         String role = chooseRole.getSelectionModel().getSelectedItem();
         String password = encodePassword(usernameTextField.getText(),setPasswordTextField.getText());
 
-//        Iterator<String> it = users.iterator();
-//        while (it.hasNext()){
-//            String u = it.next();
-//            if(usernameTextField.getText().equals(u.toString())){
-//                wrongUsernameLabel.setText("Nu puteti alege acest nume de utilizator");
-//            }else {
                 String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUES ('";
                 String insertValues = firstname + "','" + lastname + "','" + username + "','" + role + "','" + password + "')";
                 String insertToRegister = insertFields + insertValues;
@@ -118,8 +112,6 @@ public class RegisterController implements Initializable {
 
                 try {
                     Statement statement = connectDB.createStatement();
-                    System.out.println("///////////////////////////////////");
-                    System.out.println(insertToRegister);
                     statement.executeUpdate(insertToRegister);
 
                     registerLabel.setText("Contul dumneavoastra a fost inregistrat!");
@@ -130,7 +122,5 @@ public class RegisterController implements Initializable {
 
                 }
             }
-//        }
-//    }
 
 }
