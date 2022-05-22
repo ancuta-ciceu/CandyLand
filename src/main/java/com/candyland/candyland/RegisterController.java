@@ -108,6 +108,7 @@ public class RegisterController implements Initializable {
                 String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUES ('";
                 String insertValues = firstname + "','" + lastname + "','" + username + "','" + role + "','" + password + "')";
                 String insertToRegister = insertFields + insertValues;
+                System.out.println(insertToRegister);
                 addUsers(username);
 
                 try {

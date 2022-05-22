@@ -60,11 +60,15 @@ public class loginController implements Initializable {
     public static ArrayList<String> getUser() throws ClassNotFoundException, SQLException {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection conn = connectNow.getConnection();
+        System.out.println(" \n Connection:" + conn);
         Statement stm1;
         stm1 = conn.createStatement();
-        String sql = "Select usermane From user_account";
+        System.out.println(" \n Statement:" + stm1);
+        String sql = "Select username From user_account";
         ResultSet rst1;
+        System.out.println(" \n SQL" + sql);
         rst1 = stm1.executeQuery(sql);
+        System.out.println(" \n Result Set" + rst1);
         while (rst1.next()) {
             String username = rst1.getString("username");
             userList.add(username);
@@ -89,21 +93,41 @@ public class loginController implements Initializable {
     }
 
     public void validateLogin() {
-        Iterator<String> it1 = userList.iterator();
-        Iterator<String> it2 = passwordList.iterator();
-        while (it1.hasNext() && it2.hasNext()){
-            String s1 = it1.next();
-            String s2 = it2.next();
-            if(usernameTextField.getText().equals(s1.toString()) && enterPasswordField.getText().equals(s2.toString())){
-                loginMessageLabel.setText("Felicitari!");
+//        Iterator<String> it1 = userList.iterator();
+//        Iterator<String> it2 = passwordList.iterator();
+//        while (it1.hasNext() && it2.hasNext()){
+//            String s1 = it1.next();
+//            String s2 = it2.next();
+//            if(usernameTextField.getText().equals(s1.toString()) && enterPasswordField.getText().equals(s2.toString())){
+//                loginMessageLabel.setText("Felicitari!");
+//            }
+//            else{
+//                loginMessageLabel.setText("Autentificare nereusita");
+//
+//            }
+//        }
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+        String verifyLogin = "SELECT count(1)FROM user_account WHERE username='" + usernameTextField.getText() +
+                "' AND password=  '"+ enterPasswordField.getText() + "'";
+        try {
+            Statement statement;
+            statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(verifyLogin);
+            while (queryResult.next()) {
+                if (queryResult.getInt(1) == 1) {
+                    loginMessageLabel.setText("Congratulations!");
+                    //createAccountFromOnAction();
+                } else {
+                    loginMessageLabel.setText("Invalid Login.Please try again.");
+                }
             }
-            else{
-                loginMessageLabel.setText("Autentificare nereusita");
-
-            }
+        }catch(Exception e){
+                e.printStackTrace();
+                e.getCause();
         }
-
     }
+
     public void createAccountFromOnAction(){
         try{
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("register.fxml")));
