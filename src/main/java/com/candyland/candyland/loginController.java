@@ -1,5 +1,4 @@
 package com.candyland.candyland;
-import javafx.util.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +17,6 @@ import javafx.stage.StageStyle;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import java.net.URL;
@@ -56,55 +54,37 @@ public class loginController implements Initializable {
         stage.close();
     }
 
-    private static ArrayList<String> userList = new ArrayList<>();
-    public static ArrayList<String> getUser() throws ClassNotFoundException, SQLException {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection conn = connectNow.getConnection();
-        Statement stm1;
-        stm1 = conn.createStatement();
-        String sql = "Select usermane From user_account";
-        ResultSet rst1;
-        rst1 = stm1.executeQuery(sql);
-        while (rst1.next()) {
-            String username = rst1.getString("username");
-            userList.add(username);
-        }
-        return userList;
-    }
 
-    private static ArrayList<String> passwordList = new ArrayList<>();
-    public static ArrayList<String> getPassword() throws ClassNotFoundException, SQLException {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection conn = connectNow.getConnection();
-        Statement stm2;
-        stm2 = conn.createStatement();
-        String sql = "Select password From user_account";
-        ResultSet rst2;
-        rst2 = stm2.executeQuery(sql);
-        while (rst2.next()) {
-            String password = rst2.getString("password");
-            passwordList.add(password);
-        }
-        return passwordList;
-    }
 
     public void validateLogin() {
-        Iterator<String> it1 = userList.iterator();
-        Iterator<String> it2 = passwordList.iterator();
-        while (it1.hasNext() && it2.hasNext()){
-            String s1 = it1.next();
-            String s2 = it2.next();
-            if(usernameTextField.getText().equals(s1.toString()) && enterPasswordField.getText().equals(s2.toString())){
-                loginMessageLabel.setText("Felicitari!");
-            }
-            else{
-                loginMessageLabel.setText("Autentificare nereusita");
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
 
+        String verifyLogin = "SELECT count(1) FROM user account WHERE username= '" + usernameTextField.getText() + "' AND password  '" + enterPasswordField.getText() + " ' ";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult;
+            queryResult = statement.executeQuery(verifyLogin);
+
+            while (queryResult.next()) {
+                if (queryResult.getInt(1) == 1) {
+                    //loginMessageLabel.setText("Felicitari!");
+                    createAccountForm();
+
+                } else {
+                    loginMessageLabel.setText("Autentificare nereusita. Incercati din nou.");
+                }
             }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
         }
 
     }
-    public void createAccountFromOnAction(){
+    public void createAccountForm(){
         try{
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("register.fxml")));
             Stage registerstage = new Stage();

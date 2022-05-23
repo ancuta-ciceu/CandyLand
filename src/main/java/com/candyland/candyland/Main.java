@@ -11,15 +11,22 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Main extends Application {
+    private static Scene scene;
     @Override
     public void start(Stage primaryStage) throws IOException {
-        //FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
-        //Scene scene = new Scene(fxmlLoader.load(), 520, 400);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root, 520, 400));
         primaryStage.show();
     }
+    public static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+    public static Parent loadFXML(String fxml)throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml));
+        return fxmlLoader.load();
+    }
+
 
     public static void main(String[] args) {
         launch(args);

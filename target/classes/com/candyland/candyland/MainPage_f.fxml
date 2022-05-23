@@ -2,21 +2,18 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="569.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="$CONTROLLER_NAME$">
+<AnchorPane prefHeight="640.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="$CONTROLLER_NAME$">
     <children>
-        <AnchorPane prefHeight="70.0" prefWidth="382.0" style="-fx-background-color: #EBB7DF;">
+        <AnchorPane layoutX="1.0" prefHeight="70.0" prefWidth="382.0" style="-fx-background-color: #EBB7DF;">
             <children>
                 <Label layoutX="14.0" prefHeight="70.0" prefWidth="180.0" text="CandyLand">
                     <font>
@@ -59,67 +56,29 @@
                 </Button>
             </children>
         </AnchorPane>
-        <ImageView fitHeight="569.0" fitWidth="381.0" layoutX="1.0" layoutY="70.0" opacity="0.26" preserveRatio="true">
+        <ImageView fitHeight="569.0" fitWidth="394.0" layoutX="1.0" layoutY="70.0" opacity="0.26" preserveRatio="true">
             <image>
-                <Image url="@../../../../../../../images/Macarons.jpg" />
+                <Image url="@../../../../../../images/Macarons.jpg" />
             </image>
         </ImageView>
-        <Button layoutX="14.0" layoutY="88.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #EBB7DF;" text="Sortare">
-            <font>
-                <Font name="Elephant Italic" size="14.0" />
-            </font>
-        </Button>
-        <Button layoutX="215.0" layoutY="88.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #EBB7DF;" text="Filtrare">
-            <font>
-                <Font name="Elephant Italic" size="14.0" />
-            </font>
-        </Button>
-        <ScrollPane layoutX="30.0" layoutY="142.0" prefHeight="458.0" prefWidth="329.0">
-            <content>
-                <GridPane alignment="TOP_CENTER" prefHeight="458.0" prefWidth="319.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                            <image>
-                                <Image url="@../../../../../../../images/minioni.jpg" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                            <image>
-                                <Image url="@../../../../../../../images/amandina.jpg" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                            <image>
-                                <Image url="@../../../../../../../images/dobos.jpg" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                            <image>
-                                <Image url="@../../../../../../../images/cheesecake.jpg" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                            <image>
-                                <Image url="@../../../../../../../images/savarina.jpg" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitHeight="103.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                            <image>
-                                <Image url="@../../../../../../../images/cremeS.jpg" />
-                            </image>
-                        </ImageView>
-                    </children>
-                </GridPane>
-            </content>
-        </ScrollPane>
+      <HBox layoutX="-1.0" layoutY="586.0" prefHeight="54.0" prefWidth="383.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="127.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Adauga Produse" underline="true">
+               <font>
+                  <Font name="Bookman Old Style Bold Italic" size="11.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="137.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Editeaza Produsele" underline="true">
+               <font>
+                  <Font name="Bookman Old Style Bold Italic" size="11.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="134.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Iesire" underline="true">
+               <font>
+                  <Font name="Bookman Old Style Bold Italic" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
     </children>
 </AnchorPane>
