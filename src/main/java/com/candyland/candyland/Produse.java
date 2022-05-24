@@ -7,12 +7,14 @@ public class Produse {
     private final StringProperty ID;
     private final StringProperty denumire_produs;
     private final StringProperty cantitate;
+    private final StringProperty pret;
 
     public Produse()
     {
         ID = new SimpleStringProperty(this, "ID");
         denumire_produs = new SimpleStringProperty(this, "denumire_produs");
         cantitate = new SimpleStringProperty(this, "cantitate");
+        pret = new SimpleStringProperty(this, "pret");
 
     }
 
@@ -28,4 +30,7 @@ public class Produse {
     public String getCantitate() { return cantitate.get(); }
     public void setCantitate(String newCantitate) { cantitate.set(newCantitate); }
 
+    public StringProperty pretProperty() { return pret; }
+    public String getPret() { return pret.get(); }
+    public void setPret(String newPret) { pret.set(newPret); }
 }

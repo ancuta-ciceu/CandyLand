@@ -1,6 +1,5 @@
-package com.candyland.candyland.mainpage;
+package com.candyland.candyland;
 
-import com.candyland.candyland.Produse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,7 +23,8 @@ public class Mainpage_F_Controller implements Initializable {
 
     @FXML
     private TableColumn<Produse, String> IDColomn;
-
+    @FXML
+    private TableColumn<Produse, String> PretColumn;
     @FXML
     private Button btnAdd;
 
@@ -42,7 +42,8 @@ public class Mainpage_F_Controller implements Initializable {
 
     @FXML
     private TextField txtDenumire;
-
+    @FXML
+    private TextField txtPret;
     @FXML
     void Add(ActionEvent event) {
         String nume_produs, cantitate;
@@ -50,7 +51,7 @@ public class Mainpage_F_Controller implements Initializable {
         nume_produs = txtDenumire.getText();
         cantitate = txtCantitate.getText();
         try {
-            pst = con.prepareStatement("insert into produse (denumire_produs, cantitate) values (?,?,?)");
+            pst = con.prepareStatement("insert into produse (ID,denumire_produs, cantitate, pret) values (?,?,?,?)");
             pst.setString(1,nume_produs);
             pst.setString(2,cantitate);
             pst.executeUpdate();
@@ -79,7 +80,7 @@ public class Mainpage_F_Controller implements Initializable {
         ObservableList<Produse> produs = FXCollections.observableArrayList();
         try
         {
-            pst = con.prepareStatement("select ID,denumire_podus,cantitate from produse");
+            pst = con.prepareStatement("select ID,denumire_produs,cantitate,pret from produse");
             ResultSet rs = pst.executeQuery();
             {
                 while (rs.next())
@@ -88,6 +89,7 @@ public class Mainpage_F_Controller implements Initializable {
                     st.setId(rs.getString("ID"));
                     st.setName(rs.getString("denumire_produs"));
                     st.setCantitate(rs.getString("cantitate"));
+                    st.setPret(rs.getString("pret"));
                     produs.add(st);
                 }
             }
@@ -95,7 +97,7 @@ public class Mainpage_F_Controller implements Initializable {
             IDColomn.setCellValueFactory(f -> f.getValue().idProperty());
             DenumireColomn.setCellValueFactory(f -> f.getValue().nameProperty());
             CantitateColomn.setCellValueFactory(f -> f.getValue().cantitateProperty());
-
+            PretColumn.setCellValueFactory(f->f.getValue().pretProperty());
 
         }
 
@@ -115,7 +117,7 @@ public class Mainpage_F_Controller implements Initializable {
                     id = Integer.parseInt(String.valueOf(table.getItems().get(myIndex).getId()));
                     txtDenumire.setText(table.getItems().get(myIndex).getName());
                     txtCantitate.setText(table.getItems().get(myIndex).getCantitate());
-
+                    txtPret.setText(table.getItems().get(myIndex).getPret());
                 }
             });
             return myRow;
@@ -147,8 +149,8 @@ public class Mainpage_F_Controller implements Initializable {
 
     public void Connect() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/produse", "root", "cojocaru07");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/produse", "root", "root");
         } catch (ClassNotFoundException ex) {
 
         }catch (SQLException ex){

@@ -43,12 +43,6 @@ public class RegisterController implements Initializable {
     @FXML
     private Label wrongUsernameLabel;
 
-    public ArrayList<String> users = new ArrayList<String>();
-
-    public void addUsers(String u){
-        users.add(u);
-    }
-
     public void registerButtonOnAction(ActionEvent event){
         if(setPasswordTextField.getText().equals(confirmPasswordTextField.getText())){
             wrongPasswordLabel.setText("");
@@ -109,7 +103,6 @@ public class RegisterController implements Initializable {
                 String insertValues = firstname + "','" + lastname + "','" + username + "','" + role + "','" + password + "')";
                 String insertToRegister = insertFields + insertValues;
                 System.out.println(insertToRegister);
-                addUsers(username);
 
                 try {
                     Statement statement = connectDB.createStatement();
