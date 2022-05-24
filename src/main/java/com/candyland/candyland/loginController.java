@@ -1,27 +1,27 @@
 package com.candyland.candyland;
-import javafx.util.*;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.*;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.ResourceBundle;
+
 
 public class loginController implements Initializable {
     @FXML
@@ -34,12 +34,17 @@ public class loginController implements Initializable {
     private TextField usernameTextField;
     @FXML
     private PasswordField enterPasswordField;
+    @FXML
+    private ChoiceBox<String> userRole;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File brandingFile = new File("images/background.jpeg");
         Image brandingImage = new Image(brandingFile.toURI().toString());
         brandingImageView.setImage(brandingImage);
+
+        userRole.getItems().add("Client");
+        userRole.getItems().add("Furnizor");
     }
 
 
@@ -118,6 +123,7 @@ public class loginController implements Initializable {
                 if (queryResult.getInt(1) == 1) {
                     loginMessageLabel.setText("Congratulations!");
                     //createAccountFromOnAction();
+                    handleLoginAction();
                 } else {
                     loginMessageLabel.setText("Invalid Login.Please try again.");
                 }
@@ -140,4 +146,33 @@ public class loginController implements Initializable {
             e.getCause();
         }
     }
+    String role = userRole.getSelectionModel().getSelectedItem();
+
+    public void handleLoginAction() {
+
+        try{
+
+            if(userRole.getAccessibleText().equals("Client")){
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
+                Stage registerstage = new Stage();
+                registerstage.initStyle(StageStyle.UNDECORATED);
+                registerstage.setScene(new Scene(root, 381, 569));
+                registerstage.show();
+            }
+
+            else if (userRole.getAccessibleText().equals("Furnzior")){
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage_f.fxml")));
+                Stage registerstage = new Stage();
+                registerstage.initStyle(StageStyle.UNDECORATED);
+                registerstage.setScene(new Scene(root, 381, 569));
+                registerstage.show();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+
 }
