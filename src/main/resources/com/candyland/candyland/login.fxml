@@ -17,7 +17,7 @@
          <children>
             <ImageView fx:id="brandingImageView" fitHeight="521.0" fitWidth="268.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../images/background.jpeg" />
+                  <Image url="@../../../../images/background.jpeg" />
                </image>
             </ImageView>
          </children>

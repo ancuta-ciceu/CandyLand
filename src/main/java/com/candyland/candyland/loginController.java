@@ -129,8 +129,8 @@ public class loginController implements Initializable {
                 }
             }
         }catch(Exception e){
-                e.printStackTrace();
-                e.getCause();
+            e.printStackTrace();
+            e.getCause();
         }
     }
 
@@ -146,13 +146,13 @@ public class loginController implements Initializable {
             e.getCause();
         }
     }
-    String role = userRole.getSelectionModel().getSelectedItem();
+
 
     public void handleLoginAction() {
 
         try{
 
-            if(userRole.getAccessibleText().equals("Client")){
+            if(userRole.getSelectionModel().getSelectedItem().equals("Client")){
                 Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
                 Stage registerstage = new Stage();
                 registerstage.initStyle(StageStyle.UNDECORATED);
@@ -160,7 +160,7 @@ public class loginController implements Initializable {
                 registerstage.show();
             }
 
-            else if (userRole.getAccessibleText().equals("Furnzior")){
+            else if (userRole.getSelectionModel().getSelectedItem().equals("Furnzior")){
                 Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage_f.fxml")));
                 Stage registerstage = new Stage();
                 registerstage.initStyle(StageStyle.UNDECORATED);
