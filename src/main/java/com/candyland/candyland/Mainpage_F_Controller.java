@@ -1,17 +1,22 @@
 package com.candyland.candyland;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
+import javafx.stage.Stage;
+import java.io.File;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableRow;
 
 public class Mainpage_F_Controller implements Initializable {
 
@@ -25,14 +30,6 @@ public class Mainpage_F_Controller implements Initializable {
     private TableColumn<Produse, String> IDColomn;
     @FXML
     private TableColumn<Produse, String> PretColumn;
-    @FXML
-    private Button btnAdd;
-
-    @FXML
-    private Button btnDelete;
-
-    @FXML
-    private Button btnUpdate;
 
     @FXML
     private TableView<Produse> table;
@@ -45,31 +42,54 @@ public class Mainpage_F_Controller implements Initializable {
     @FXML
     private TextField txtPret;
     @FXML
-    void Add(ActionEvent event) {
-        String nume_produs, cantitate;
+    private TextField txtid;
+    @FXML
+    private Button closebtn;
+
+    public void cancelButtonOnAction(ActionEvent event){
+        Stage stage = (Stage) closebtn.getScene().getWindow();
+        stage.close();
+        Platform.exit();
+    }
+    public void AddOnAction(ActionEvent event) {
+        String denumire_produs, cantitate,pret;
         Connect();
-        nume_produs = txtDenumire.getText();
+        denumire_produs = txtDenumire.getText();
         cantitate = txtCantitate.getText();
+        pret=txtPret.getText();
         try {
-            pst = con.prepareStatement("insert into produse (ID,denumire_produs, cantitate, pret) values (?,?,?,?)");
-            pst.setString(1,nume_produs);
+            pst = con.prepareStatement("insert into produse (denumire_produs, cantitate, pret) values ('','','')");
+            pst.setString(1,denumire_produs);
             pst.setString(2,cantitate);
-            pst.executeUpdate();
+            pst.setString(3, pret);
+            int status=pst.executeUpdate();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Adaugare produse");
+            if(status==1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Adaugare produse");
 
-            alert.setHeaderText("Adaugare produse");
-            alert.setContentText("Produs adaugat");
+                alert.setHeaderText("Adaugare produse");
+                alert.setContentText("Produs adaugat");
+                alert.showAndWait();
+                table();
+                txtDenumire.setText("");
+                txtCantitate.setText("");
+                txtPret.setText("");
 
-            alert.showAndWait();
+                txtDenumire.requestFocus();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fail");
+                alert.setHeaderText("");
+                alert.setContentText("Nu s-a putut face adaugarea");
+                alert.showAndWait();
 
-            table();
+            }
 
-            txtDenumire.setText("");
-            txtCantitate.setText("");
-            txtDenumire.requestFocus();
+
         }catch (SQLException ex){
+            Logger.getLogger(Mainpage_F_Controller.class.getName()).log(Level.SEVERE, null, ex);
 
         }
     }
@@ -128,18 +148,33 @@ public class Mainpage_F_Controller implements Initializable {
 
     @FXML
     void Delete(ActionEvent event) {
+        myIndex = table.getSelectionModel().getSelectedIndex();
+        id=Integer.parseInt(String.valueOf(table.getItems().get(myIndex).getId()));
 
+        try{
+            pst = con.prepareStatement("delete from produse where id = ?");
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Produse");
+                alert.setHeaderText("Produse");
+                alert.setContentText("Ati sters acest produs");
+                alert.showAndWait();
+                table();
+
+        }catch (SQLException ex){
+            Logger.getLogger(Mainpage_F_Controller.class.getName()).log(Level.SEVERE, null,ex);
+        }
     }
 
-    @FXML
-    void Update(ActionEvent event) {
 
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            Connect();
+
+        Connect();
             table();
+
     }
 
     Connection con;
@@ -150,7 +185,7 @@ public class Mainpage_F_Controller implements Initializable {
     public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/produse", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/database", "root", "root");
         } catch (ClassNotFoundException ex) {
 
         }catch (SQLException ex){

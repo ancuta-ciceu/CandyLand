@@ -69,7 +69,7 @@ public class RegisterController implements Initializable {
         chooseRole.getItems().add("Furnizor");
 
     }
-    private  String encodePassword(String salt, String password) {
+    public String encodePassword(String salt, String password) {
         MessageDigest md = getMessageDigest();
         md.update(salt.getBytes(StandardCharsets.UTF_8));
 

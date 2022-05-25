@@ -1,27 +1,30 @@
 package com.candyland.candyland;
 
-import com.candyland.candyland.DatabaseConnection;
-import java.io.File;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Objects;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.File;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.ResourceBundle;
+
 
 public class loginController implements Initializable {
     @FXML
@@ -34,65 +37,116 @@ public class loginController implements Initializable {
     private TextField usernameTextField;
     @FXML
     private PasswordField enterPasswordField;
+    @FXML
+    private ChoiceBox<String> userRole;
 
-    public loginController() {
-    }
-
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File brandingFile = new File("images/background.jpeg");
         Image brandingImage = new Image(brandingFile.toURI().toString());
-        this.brandingImageView.setImage(brandingImage);
+        brandingImageView.setImage(brandingImage);
+
+        userRole.getItems().add("Client");
+        userRole.getItems().add("Furnizor");
     }
 
-    public void loginButtonOnAction(ActionEvent event) {
-        if (!this.usernameTextField.getText().isBlank() && !this.enterPasswordField.getText().isBlank()) {
-            this.validateLogin();
-        } else {
-            this.loginMessageLabel.setText("Va rugam introduceti numele de utilizator si parola");
-        }
 
+    public void loginButtonOnAction(ActionEvent event) {
+        if (usernameTextField.getText().isBlank() == false && enterPasswordField.getText().isBlank() == false) {
+            validateLogin();
+        } else {
+            loginMessageLabel.setText("Va rugam introduceti numele de utilizator si parola");
+        }
     }
 
     public void cancelButtonOnAction(ActionEvent event) {
-        Stage stage = (Stage)this.cancelButton.getScene().getWindow();
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
+    public String encodePassword(String salt, String password) {
+        MessageDigest md = getMessageDigest();
+        md.update(salt.getBytes(StandardCharsets.UTF_8));
+
+        byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
+
+        // This is the way a password should be encoded when checking the credentials
+        return new String(hashedPassword, StandardCharsets.UTF_8)
+                .replace("\"", ""); //to be able to save in JSON format
+    }
+
+    private static MessageDigest getMessageDigest() {
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-512");
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("SHA-512 does not exist!");
+        }
+        return md;
+    }
+
     public void validateLogin() {
+
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
-        String var10000 = this.usernameTextField.getText();
-        String verifyLogin = "SELECT count(1) FROM user account WHERE username= '" + var10000 + "' AND password  '" + this.enterPasswordField.getText() + " ' ";
-
+        String verifyLogin = "SELECT count(1)FROM user_account WHERE username='" + usernameTextField.getText() +
+                "' AND password=  '" + encodePassword(usernameTextField.getText(), enterPasswordField.getText()) + "'";
         try {
-            Statement statement = connectDB.createStatement();
+            Statement statement;
+            statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
-
-            while(queryResult.next()) {
+            while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
-                    this.createAccountForm();
+                    // loginMessageLabel.setText("Congratulations!");
+                    handleLoginAction();
                 } else {
-                    this.loginMessageLabel.setText("Autentificare nereusita. Incercati din nou.");
+                    loginMessageLabel.setText("Invalid Login.Please try again.");
                 }
             }
-        } catch (Exception var6) {
-            var6.printStackTrace();
-            var6.getCause();
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
         }
-
     }
 
-    public void createAccountForm() {
+    public void createAccountFromOnAction() {
         try {
-            Parent root = (Parent)FXMLLoader.load((URL)Objects.requireNonNull(this.getClass().getResource("register.fxml")));
-            Stage registerStage = new Stage();
-            registerStage.initStyle(StageStyle.UNDECORATED);
-            registerStage.setScene(new Scene(root, 381.0D, 569.0D));
-            registerStage.show();
-        } catch (Exception var3) {
-            var3.printStackTrace();
-            var3.getCause();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("register.fxml")));
+            Stage registerstage = new Stage();
+            registerstage.initStyle(StageStyle.UNDECORATED);
+            registerstage.setScene(new Scene(root, 381, 569));
+            registerstage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
         }
-
     }
+
+
+    public void handleLoginAction() {
+
+        try {
+
+            if (userRole.getSelectionModel().getSelectedItem().equals("Client")) {
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage.fxml")));
+                Stage registerstage = new Stage();
+                registerstage.initStyle(StageStyle.UNDECORATED);
+                registerstage.setScene(new Scene(root, 383, 704));
+                registerstage.show();
+            } else {
+                if (userRole.getSelectionModel().getSelectedItem().equals("Furnizor")) {
+                    Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainPage_f.fxml")));
+                    Stage registerstage1 = new Stage();
+                    registerstage1.initStyle(StageStyle.UNDECORATED);
+                    registerstage1.setScene(new Scene(root, 421, 609));
+                    registerstage1.show();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+
 }

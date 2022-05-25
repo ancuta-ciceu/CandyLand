@@ -7,19 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 public class mainpage_client_controller implements Initializable {
     @FXML
@@ -30,6 +25,10 @@ public class mainpage_client_controller implements Initializable {
     private TableColumn<Produse, String> nameColumn;
     @FXML
     private TableColumn<Produse, String> priceColumn;
+    @FXML
+    private TableColumn<Comenzi, String>produsComandat;
+    @FXML
+    private TableColumn<Comenzi, String>cantitate;
 
     @FXML
     private Button addToCartBtn;
@@ -39,6 +38,8 @@ public class mainpage_client_controller implements Initializable {
     private Button filterBtn;
     @FXML
     private TableView<Produse> table;
+    @FXML
+    private TableView<Comenzi> tableIstoric;
     @FXML
     private TextField DenumProd;
     @FXML
@@ -58,7 +59,7 @@ public class mainpage_client_controller implements Initializable {
     public void Connect() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/produse", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/database", "root", "root");
         } catch (ClassNotFoundException ex) {
 
         }catch (SQLException ex){
@@ -69,6 +70,7 @@ public class mainpage_client_controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Connect();
         table();
+        table_comenzi();
     }
     public void table()
     {
@@ -117,6 +119,55 @@ public class mainpage_client_controller implements Initializable {
         });
 
     }
+
+    public void table_comenzi()
+    {
+        Connect();
+        ObservableList<Comenzi> comanda = FXCollections.observableArrayList();
+        try
+        {
+            pst = con.prepareStatement("select denumire_produs,cantitate from comanda");
+            ResultSet rs = pst.executeQuery();
+            {
+                while (rs.next())
+                {
+                    Comenzi st = new Comenzi();
+                    st.setName(rs.getString("denumire_produs"));
+                    st.setCantitate(rs.getString("cantitate"));
+//                    st.setPret(rs.getString("pret"));
+
+                    comanda.add(st);
+                }
+            }
+            tableIstoric.setItems(comanda);
+            produsComandat.setCellValueFactory(f -> f.getValue().nameProperty());
+            cantitate.setCellValueFactory(f -> f.getValue().cantitateProperty());
+            //priceColumn.setCellValueFactory(f -> f.getValue().pretProperty());
+
+
+        }
+
+        catch (SQLException ex)
+        {
+            Logger.getLogger(mainpage_client_controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        table.setRowFactory( tv -> {
+            TableRow<Produse> myRow = new TableRow<>();
+            myRow.setOnMouseClicked (event ->
+            {
+                if (event.getClickCount() == 1 && (!myRow.isEmpty()))
+                {
+                    myIndex =  tableIstoric.getSelectionModel().getSelectedIndex();
+                    produsComandat.setText(tableIstoric.getItems().get(myIndex).getName());
+                    cantitate.setText(tableIstoric.getItems().get(myIndex).getCantitate());
+                }
+            });
+            return  myRow;
+        });
+
+    }
+
 
 
 
