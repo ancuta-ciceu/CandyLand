@@ -65,7 +65,7 @@
             </Button>
             </children>
         </AnchorPane>
-      <Pane layoutX="25.0" layoutY="88.0" prefHeight="185.0" prefWidth="334.0">
+      <Pane layoutX="32.0" layoutY="83.0" prefHeight="158.0" prefWidth="334.0">
          <children>
             <Label layoutX="10.0" layoutY="52.0" text="Denumire produs">
                <font>
@@ -133,28 +133,6 @@
                </textFill>
             </Label>
             <TextField fx:id="txtPret" layoutX="167.0" layoutY="140.0" />
-            <Label layoutX="10.0" layoutY="18.0" text="Id produs">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <textFill>
-                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.7568627595901489" green="0.1764705926179886" blue="0.7490196228027344" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </RadialGradient>
-               </textFill>
-            </Label>
-            <TextField fx:id="txtid" layoutX="167.0" layoutY="16.0" />
             <Label fx:id="messajverificare" layoutX="39.0" layoutY="177.0" />
          </children>
       </Pane>
@@ -166,7 +144,7 @@
             <TableColumn fx:id="PretColumn" prefWidth="84.79998779296875" text="Pret" />
         </columns>
       </TableView>
-      <Button fx:id="btnAdd" layoutX="-9.0" layoutY="564.0" mnemonicParsing="false" onAction="#Add" prefHeight="40.0" prefWidth="137.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Adaugare" underline="true">
+      <Button fx:id="btnAdd" layoutX="-9.0" layoutY="564.0" mnemonicParsing="false" onAction="#AddOnAction" prefHeight="40.0" prefWidth="137.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Adaugare" underline="true">
          <font>
             <Font name="Bookman Old Style Bold Italic" size="11.0" />
          </font>

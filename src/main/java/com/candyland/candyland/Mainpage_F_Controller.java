@@ -168,6 +168,37 @@ public class Mainpage_F_Controller implements Initializable {
     }
 
 
+    public void Update(ActionEvent event) {
+        String nume_produs, cantitate, pret;
+
+        myIndex = table.getSelectionModel().getSelectedIndex();
+        id = Integer.parseInt(String.valueOf(table.getItems().get(myIndex).getId()));
+        nume_produs = txtDenumire.getText();
+        cantitate=txtCantitate.getText();
+        pret=txtPret.getText();
+        try{
+            pst=con.prepareStatement("update produse set denumire_produs=?, cantitate=?, pret=? where id=?");
+            pst.setString(1, nume_produs);
+            pst.setString(2, cantitate);
+            pst.setString(3, pret);
+            pst.setInt(4, id);
+
+            pst.executeUpdate();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Modificari aduse produselor");
+
+            alert.setHeaderText("Modificari aduse produselor");
+            alert.setContentText("Actualizate finalizata");
+
+            alert.showAndWait();
+            table();
+        }catch (SQLException e){
+
+            Logger.getLogger(Mainpage_F_Controller.class.getName()).log(Level.SEVERE, null,e);
+
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
