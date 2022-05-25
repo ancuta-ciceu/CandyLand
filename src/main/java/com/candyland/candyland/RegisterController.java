@@ -43,12 +43,6 @@ public class RegisterController implements Initializable {
     @FXML
     private Label wrongUsernameLabel;
 
-    public ArrayList<String> users = new ArrayList<String>();
-
-    public void addUsers(String u){
-        users.add(u);
-    }
-
     public void registerButtonOnAction(ActionEvent event){
         if(setPasswordTextField.getText().equals(confirmPasswordTextField.getText())){
             wrongPasswordLabel.setText("");
@@ -75,7 +69,7 @@ public class RegisterController implements Initializable {
         chooseRole.getItems().add("Furnizor");
 
     }
-    private  String encodePassword(String salt, String password) {
+    public String encodePassword(String salt, String password) {
         MessageDigest md = getMessageDigest();
         md.update(salt.getBytes(StandardCharsets.UTF_8));
 
@@ -105,16 +99,10 @@ public class RegisterController implements Initializable {
         String role = chooseRole.getSelectionModel().getSelectedItem();
         String password = encodePassword(usernameTextField.getText(),setPasswordTextField.getText());
 
-        //Iterator<String> it = users.iterator();
-        //while (it.hasNext()){
-           // String u = it.next();
-            //if(usernameTextField.getText().equals(u.toString())){
-               // wrongUsernameLabel.setText("Nu puteti alege acest nume de utilizator");
-            //}else {
-                String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUE ('";
+                String insertFields = "INSERT INTO user_account(firstname, lastname, username, role, password) VALUES ('";
                 String insertValues = firstname + "','" + lastname + "','" + username + "','" + role + "','" + password + "')";
                 String insertToRegister = insertFields + insertValues;
-                addUsers(username);
+                System.out.println(insertToRegister);
 
                 try {
                     Statement statement = connectDB.createStatement();
@@ -128,7 +116,5 @@ public class RegisterController implements Initializable {
 
                 }
             }
-       // }
-   // }
 
 }

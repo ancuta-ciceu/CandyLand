@@ -9,7 +9,7 @@ public Connection getConnection(){
     String databaseName = "database";
     String databaseUser = "root";
     String databasePassword = "root";
-    String url = "jdbc:mysql://127.0.0.1:3306/"+databaseName;
+    String url = "jdbc:mysql://127.0.0.1:3306/" + databaseName;
 
     try{
         Class.forName("com.mysql.cj.jdbc.Driver");

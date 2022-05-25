@@ -2,18 +2,22 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="640.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="$CONTROLLER_NAME$">
+<AnchorPane prefHeight="640.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.candyland.candyland.Mainpage_F_Controller">
     <children>
-        <AnchorPane layoutX="1.0" prefHeight="70.0" prefWidth="382.0" style="-fx-background-color: #EBB7DF;">
+        <AnchorPane prefHeight="70.0" prefWidth="407.0" style="-fx-background-color: #EBB7DF;">
             <children>
                 <Label layoutX="14.0" prefHeight="70.0" prefWidth="180.0" text="CandyLand">
                     <font>
@@ -40,7 +44,7 @@
                     <graphic>
                         <ImageView fitHeight="17.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../../images/home.png" />
+                                <Image url="@../../../../java/com/candyland/candyland/mainpage/Imagini_Produse/home.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -49,36 +53,111 @@
                     <graphic>
                         <ImageView fitHeight="18.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../../../images/shopping.png" />
+                                <Image url="@../../../../java/com/candyland/candyland/mainpage/Imagini_Produse/shopping.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
+            <Button fx:id="closebtn" layoutX="402.0" layoutY="1.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="26.0" prefWidth="0.0" style="-fx-background-color: #EBB7DF;" text="X">
+               <font>
+                  <Font name="Berlin Sans FB Bold" size="12.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
-        <ImageView fitHeight="569.0" fitWidth="394.0" layoutX="1.0" layoutY="70.0" opacity="0.26" preserveRatio="true">
-            <image>
-                <Image url="@../../../../../../images/Macarons.jpg" />
-            </image>
-        </ImageView>
-      <HBox layoutX="-1.0" layoutY="586.0" prefHeight="54.0" prefWidth="383.0">
+      <Pane layoutX="32.0" layoutY="83.0" prefHeight="158.0" prefWidth="334.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="127.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Adauga Produse" underline="true">
+            <Label layoutX="10.0" layoutY="52.0" text="Denumire produs">
                <font>
-                  <Font name="Bookman Old Style Bold Italic" size="11.0" />
+                  <Font size="15.0" />
                </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="137.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Editeaza Produsele" underline="true">
+               <textFill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7568627595901489" green="0.1764705926179886" blue="0.7490196228027344" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+            <Label layoutX="13.0" layoutY="100.0" text="Cantitate produs">
                <font>
-                  <Font name="Bookman Old Style Bold Italic" size="11.0" />
+                  <Font size="15.0" />
                </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="134.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Iesire" underline="true">
+               <textFill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7568627595901489" green="0.1764705926179886" blue="0.7490196228027344" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+            <TextField fx:id="txtDenumire" layoutX="167.0" layoutY="50.0" />
+            <TextField fx:id="txtCantitate" layoutX="167.0" layoutY="98.0" />
+            <Label layoutX="14.0" layoutY="142.0" text="Pret produs">
                <font>
-                  <Font name="Bookman Old Style Bold Italic" size="12.0" />
+                  <Font size="15.0" />
                </font>
-            </Button>
+               <textFill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7568627595901489" green="0.1764705926179886" blue="0.7490196228027344" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </RadialGradient>
+               </textFill>
+            </Label>
+            <TextField fx:id="txtPret" layoutX="167.0" layoutY="140.0" />
+            <Label fx:id="messajverificare" layoutX="39.0" layoutY="177.0" />
          </children>
-      </HBox>
+      </Pane>
+      <TableView fx:id="table" layoutX="25.0" layoutY="289.0" onSort="#table" prefHeight="254.0" prefWidth="383.0">
+        <columns>
+          <TableColumn fx:id="IDColomn" prefWidth="40.79998588562012" text="ID" />
+          <TableColumn fx:id="DenumireColomn" prefWidth="164.79999542236328" text="Denumire produs" />
+            <TableColumn fx:id="CantitateColomn" prefWidth="89.60003662109375" text="Cantitate" />
+            <TableColumn fx:id="PretColumn" prefWidth="84.79998779296875" text="Pret" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnAdd" layoutX="-9.0" layoutY="564.0" mnemonicParsing="false" onAction="#AddOnAction" prefHeight="40.0" prefWidth="137.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Adaugare" underline="true">
+         <font>
+            <Font name="Bookman Old Style Bold Italic" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDelete" layoutX="120.0" layoutY="564.0" mnemonicParsing="false" onAction="#Delete" prefHeight="40.0" prefWidth="158.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Stergere" underline="true">
+         <font>
+            <Font name="Bookman Old Style Bold Italic" size="11.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnUpdate" layoutX="278.0" layoutY="564.0" mnemonicParsing="false" onAction="#Update" prefHeight="40.0" prefWidth="146.0" style="-fx-background-color: #EBB7DF; -fx-border-color: #FFFFFF;" text="Actualizare" underline="true">
+         <font>
+            <Font name="Bookman Old Style Bold Italic" size="12.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
