@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="569.0" prefWidth="381.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.candyland.candyland.mainpage_client_controller">
+   <children>
+      <AnchorPane prefHeight="70.0" prefWidth="382.0" style="-fx-background-color: #EBB7DF;">
+         <children>
+            <Label layoutX="14.0" prefHeight="70.0" prefWidth="180.0" text="CandyLand">
+               <font>
+                  <Font name="Bodoni MT Italic" size="36.0" />
+               </font>
+               <textFill>
+                  <LinearGradient cycleMethod="REFLECT" endX="0.5189394011641993" endY="0.924242419726921" startX="0.5568181745933765" startY="0.5227272077040239">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7699999809265137" green="0.33880001306533813" blue="0.33880001306533813" opacity="0.8500000238418579" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Button layoutX="346.0" layoutY="40.0" mnemonicParsing="false" prefHeight="10.0" prefWidth="26.0" style="-fx-background-color: #EBB7DF;">
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../java/com/candyland/candyland/mainpage/Imagini_Produse/home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button layoutX="310.0" layoutY="39.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="35.0" style="-fx-background-color: #EBB7DF;">
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../java/com/candyland/candyland/mainpage/Imagini_Produse/shopping.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="closeButton" layoutX="348.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeButtonOnAction" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #EBB7DF;" text="X">
+               <font>
+                  <Font name="Bodoni MT Black Italic" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <ImageView fx:id="FundalClient" fitHeight="569.0" fitWidth="381.0" layoutX="1.0" layoutY="70.0" nodeOrientation="INHERIT" opacity="0.25" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../java/com/candyland/candyland/mainpage/Imagini_Produse/Macarons.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="table" layoutX="27.0" layoutY="272.0" onSort="#table" prefHeight="200.0" prefWidth="328.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="154.39996337890625" text="Denumire Produs" />
+            <TableColumn fx:id="availableColumn" prefWidth="112.00006103515625" text="Disponibil(buc)" />
+            <TableColumn fx:id="priceColumn" prefWidth="61.5999755859375" text="Pret" />
+        </columns>
+      </TableView>
+      <Label layoutX="24.0" layoutY="116.0" text="Denumire Produs" />
+      <Label layoutX="28.0" layoutY="161.0" text="Cantitate dorita" />
+      <TextField fx:id="DenumProd" layoutX="125.0" layoutY="111.0" prefHeight="26.0" prefWidth="235.0" />
+      <TextField fx:id="Cantitate" layoutX="125.0" layoutY="157.0" prefHeight="26.0" prefWidth="235.0" />
+      <HBox layoutX="1.0" layoutY="604.0" prefHeight="36.0" prefWidth="382.0">
+         <children>
+            <Button fx:id="addToCartBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="127.0" style="-fx-background-color: #EBB7DF;" text="Adauga in cos">
+               <font>
+                  <Font name="Bell MT Italic" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="sortBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="127.0" style="-fx-background-color: #EBB7DF;" text="Sorteaza">
+               <font>
+                  <Font name="Bell MT Italic" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="filterBtn" mnemonicParsing="false" prefHeight="34.0" prefWidth="127.0" style="-fx-background-color: #EBB7DF;" text="Filtreaza">
+               <font>
+                  <Font name="Bell MT Italic" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
