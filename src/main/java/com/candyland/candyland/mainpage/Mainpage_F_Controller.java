@@ -42,35 +42,54 @@ public class Mainpage_F_Controller implements Initializable {
 
     @FXML
     private TextField txtDenumire;
-
+    @FXML
+    private TextField txtPret;
+    @FXML
+    private TableColumn<Produse, String> PretColumn;
     @FXML
     void Add(ActionEvent event) {
-        String nume_produs, cantitate;
+        String denumire_produs, cantitate,pret;
         Connect();
-        nume_produs = txtDenumire.getText();
+        denumire_produs = txtDenumire.getText();
         cantitate = txtCantitate.getText();
+        pret=txtPret.getText();
         try {
-            pst = con.prepareStatement("insert into produse (denumire_produs, cantitate) values (?,?,?)");
-            pst.setString(1,nume_produs);
+            pst = con.prepareStatement("insert into produse (denumire_produs, cantitate, pret) values (?,?,?)");
+            pst.setString( 1 ,denumire_produs);
             pst.setString(2,cantitate);
-            pst.executeUpdate();
+            pst.setString(3, pret);
+            int status=pst.executeUpdate();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Adaugare produse");
+            if(status==1) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Adaugare produse");
 
-            alert.setHeaderText("Adaugare produse");
-            alert.setContentText("Produs adaugat");
+                alert.setHeaderText("Adaugare produse");
+                alert.setContentText("Produs adaugat");
+                alert.showAndWait();
+                table();
+                txtDenumire.setText("");
+                txtCantitate.setText("");
+                txtPret.setText("");
 
-            alert.showAndWait();
+                txtDenumire.requestFocus();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Fail");
+                alert.setHeaderText("");
+                alert.setContentText("Nu s-a putut face adaugarea");
+                alert.showAndWait();
 
-            table();
+            }
 
-            txtDenumire.setText("");
-            txtCantitate.setText("");
-            txtDenumire.requestFocus();
+
         }catch (SQLException ex){
+            Logger.getLogger(Mainpage_F_Controller.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+//
+
     }
 
     public void table()
@@ -79,7 +98,7 @@ public class Mainpage_F_Controller implements Initializable {
         ObservableList<Produse> produs = FXCollections.observableArrayList();
         try
         {
-            pst = con.prepareStatement("select ID,denumire_podus,cantitate from produse");
+            pst = con.prepareStatement("select ID,denumire_podus,cantitate, pret  from produse");
             ResultSet rs = pst.executeQuery();
             {
                 while (rs.next())
@@ -88,6 +107,7 @@ public class Mainpage_F_Controller implements Initializable {
                     st.setId(rs.getString("ID"));
                     st.setName(rs.getString("denumire_produs"));
                     st.setCantitate(rs.getString("cantitate"));
+                    st.setPret(rs.getString("pret"));
                     produs.add(st);
                 }
             }
@@ -95,6 +115,7 @@ public class Mainpage_F_Controller implements Initializable {
             IDColomn.setCellValueFactory(f -> f.getValue().idProperty());
             DenumireColomn.setCellValueFactory(f -> f.getValue().nameProperty());
             CantitateColomn.setCellValueFactory(f -> f.getValue().cantitateProperty());
+            PretColumn.setCellValueFactory(f -> f.getValue().pretProperty());
 
 
         }
@@ -115,7 +136,7 @@ public class Mainpage_F_Controller implements Initializable {
                     id = Integer.parseInt(String.valueOf(table.getItems().get(myIndex).getId()));
                     txtDenumire.setText(table.getItems().get(myIndex).getName());
                     txtCantitate.setText(table.getItems().get(myIndex).getCantitate());
-
+                    txtPret.setText(table.getItems().get(myIndex).getPret());
                 }
             });
             return myRow;

@@ -119,8 +119,8 @@
       <Label layoutX="21.0" layoutY="490.0" prefHeight="18.0" prefWidth="190.0" text="Istoric comenzi:" />
       <TableView fx:id="tableIstoric" layoutX="25.0" layoutY="518.0" prefHeight="134.0" prefWidth="308.0">
         <columns>
-          <TableColumn fx:id="produsComandat" prefWidth="150.39996719360352" text="Produs comandat" />
-          <TableColumn fx:id="cantitate" prefWidth="156.7999725341797" text="Cantitate comandata" />
+          <TableColumn fx:id="produsComandat" prefWidth="123.20001602172852" text="Produs comandat" />
+          <TableColumn fx:id="cantitate" prefWidth="123.19999694824219" text="Cantitate comandata" />
         </columns>
       </TableView>
    </children>
